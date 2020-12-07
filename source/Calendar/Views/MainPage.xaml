@@ -9,8 +9,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="../Resources/image.jpg" Stretch="Fill"/>
-        <CalendarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="../Resources/image.png" Stretch="Fill"/>
+        <CalendarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                      OutOfScopeBackground="#66000000"
+                      BorderBrush="#66000000" />
 
     </Grid>
 </Page>
