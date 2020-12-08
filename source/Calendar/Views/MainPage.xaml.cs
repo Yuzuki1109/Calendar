@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Calendar.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,28 @@ namespace Calendar.Views
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        #region properties
+
+        /// <summary>
+        /// ViewModel
+        /// </summary>
+        public MainPageViewModel ViewModel { get; private set; } = new MainPageViewModel();
+
+        #endregion
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public MainPage()
         {
             this.InitializeComponent();
+
+            ViewModel.Initialize(this);
+
+            this.DataContext = ViewModel;
+
+            Window.Current.SetTitleBar(this.TitleBar);
         }
     }
 }

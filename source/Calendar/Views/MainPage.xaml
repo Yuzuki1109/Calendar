@@ -9,10 +9,37 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="../Resources/image.png" Stretch="Fill"/>
-        <CalendarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
-                      OutOfScopeBackground="#66000000"
-                      BorderBrush="#66000000" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ToggleButton Grid.Column="0" x:Uid="TitleButton" Style="{StaticResource ToggleButtonTitleBar}">
+                    <SymbolIcon x:Uid="TitleSymbolIcon" Style="{StaticResource SymbolIconTitleBar}"/>
+                </ToggleButton>
+                <Grid x:Name="TitleBar" Grid.Column="1">
+                    <Rectangle Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Title}" />
+                </Grid>
+            </Grid>
+        </Grid>
 
+        <Grid Grid.Row="1">
+            <Rectangle Style="{StaticResource CalendarBackgroundRectangle}"/>
+            <Image Style="{StaticResource CalendarBackgroundImage}" Source="../Resources/image.png"/>
+            <Rectangle Style="{StaticResource CalendarBackgroundHeader}"
+                       Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                       Height="{Binding CalendarHeaderHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <CalendarView Style="{StaticResource Calendar}"
+                          Language="{x:Bind ViewModel.CalendarLanguage}"
+                          DisplayMode="{Binding CalendarDisplayMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          CalendarItemBackground="#33000000"
+                          OutOfScopeBackground="#66000000"/>
+        </Grid>
     </Grid>
 </Page>

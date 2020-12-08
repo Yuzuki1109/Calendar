@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Source>C:\Users\yu-ra\Desktop\カレンダーのフリーアイコン15.png</Source>
+    <SmallTileSource>C:\Users\yu-ra\Desktop\カレンダーのフリーアイコン15.png</SmallTileSource>
+    <MediumTileSource>C:\Users\yu-ra\Desktop\カレンダーのフリーアイコン15.png</MediumTileSource>
+    <WideTileSource>C:\Users\yu-ra\Desktop\カレンダーのフリーアイコン15.png</WideTileSource>
+    <LargeTileSource>C:\Users\yu-ra\Desktop\カレンダーのフリーアイコン15.png</LargeTileSource>
+    <AppIconSource>C:\Users\yu-ra\Desktop\カレンダーのフリーアイコン15.png</AppIconSource>
+    <SplashScreenSource>C:\Users\yu-ra\Desktop\カレンダーのフリーアイコン15.png</SplashScreenSource>
+    <PackageLogoSource>C:\Users\yu-ra\Desktop\カレンダーのフリーアイコン15.png</PackageLogoSource>
+  </PropertyGroup>
+</Project>
