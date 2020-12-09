@@ -46,7 +46,7 @@ namespace Calendar.ViewModels
         {
             get
             {
-                return String.Format("{0} - {1}", AssemblyUtil.GetAppName(), AssemblyUtil.GetVersion());
+                return String.Format("{0} - {1}", AssemblyUtil.AppName, AssemblyUtil.Version);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Calendar.ViewModels
         /// </summary>
         public string CalendarLanguage
         {
-            get { return AssemblyUtil.GetLanguage(); }
+            get { return AssemblyUtil.Language; }
 
             set { Set(ref this.calendarLanguage, value, nameof(CalendarLanguage)); }
         }
