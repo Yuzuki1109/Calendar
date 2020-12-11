@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Calendar.Enums;
+using Calendar.Utils;
+using Library;
 
 namespace Calendar.Settings
 {
     /// <summary>
     /// アプリケーション設定クラス
     /// </summary>
-    [XmlRoot(nameof(ApplicationSettings))]
+    [Serializable]
     public class ApplicationSettings : SettingBase
     {
         #region properties
@@ -19,7 +21,7 @@ namespace Calendar.Settings
         /// <summary>
         /// カレンダーの言語
         /// </summary>
-        public string CalendarLanguageStr { get; private set; }
+        public string CalendarLanguageStr { get; set; }
 
         /// <summary>
         /// カレンダー言語
@@ -54,8 +56,21 @@ namespace Calendar.Settings
         /// <summary>
         /// 設定ファイルロード
         /// </summary>
-        public static void Load()
+        public static async void Load()
         {
+            string path = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "fuga.xml");
+
+            try
+            {
+                await FileUtil.Serialize(new ApplicationSettings(), path);
+            }
+            catch (Exception e)
+            {
+                SeriLogger.Error(e);
+
+                
+            }
+
 
         }
 
