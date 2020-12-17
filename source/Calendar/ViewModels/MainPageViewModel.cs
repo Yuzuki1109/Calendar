@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Calendar.Settings;
+using Calendar.Enums;
 
 namespace Calendar.ViewModels
 {
@@ -26,6 +28,10 @@ namespace Calendar.ViewModels
             View = mainPage;
 
             CalendarDisplayMode = CalendarViewDisplayMode.Month;
+
+            CalendarLanguage = ApplicationSettings.Instance.CalendarLanguage;
+
+
         }
 
         #region view
@@ -56,7 +62,17 @@ namespace Calendar.ViewModels
         /// </summary>
         public string CalendarLanguage
         {
-            get { return AssemblyUtil.Language; }
+            get
+            {
+                if (calendarLanguage == Language.de_DE.ToString())
+                {
+                    return AssemblyUtil.Language;
+                }
+                else
+                {
+                    return calendarLanguage.Replace("_", "-");
+                }
+            }
 
             set { Set(ref this.calendarLanguage, value, nameof(CalendarLanguage)); }
         }

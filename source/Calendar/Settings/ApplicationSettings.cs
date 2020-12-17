@@ -7,32 +7,21 @@ using System.Xml.Serialization;
 using Calendar.Enums;
 using Calendar.Utils;
 using Library;
+using Windows.Storage;
 
 namespace Calendar.Settings
 {
     /// <summary>
     /// アプリケーション設定クラス
     /// </summary>
-    [Serializable]
-    public class ApplicationSettings : SettingBase
+    public class ApplicationSettings
     {
         #region properties
 
         /// <summary>
-        /// カレンダーの言語
-        /// </summary>
-        public string CalendarLanguageStr { get; set; }
-
-        /// <summary>
         /// カレンダー言語
         /// </summary>
-        [XmlIgnore]
-        public Language CalendarLanguage
-        {
-            get { return (Language)Enum.Parse(typeof(Language), CalendarLanguageStr); }
-
-            set { CalendarLanguageStr = value.ToString(); }
-        }
+        public string CalendarLanguage { get; set; }
 
         private static ApplicationSettings instance;
 
@@ -54,24 +43,42 @@ namespace Calendar.Settings
         #region static
 
         /// <summary>
-        /// 設定ファイルロード
+        /// 設定ロード
         /// </summary>
-        public static async void Load()
+        public static void Load()
         {
-            string path = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "fuga.xml");
+            ApplicationDataContainer container = ApplicationData.Current.LocalSettings;
 
-            try
+            Type type = typeof(ApplicationSettings);
+
+            foreach (var field in type.GetProperties())
             {
-                await FileUtil.Serialize(new ApplicationSettings(), path);
+                if (!field.CanWrite) continue;
+
+                if (!container.Values.ContainsKey(field.Name)) continue;
+
+                field.SetValue(Instance, container.Values[field.Name]);
             }
-            catch (Exception e)
+
+        }
+
+        /// <summary>
+        /// 設定保存
+        /// </summary>
+        public static void Save()
+        {
+            ApplicationDataContainer container = ApplicationData.Current.LocalSettings;
+
+            container.Values.Clear();
+
+            Type type = typeof(ApplicationSettings);
+
+            foreach (var field in type.GetProperties())
             {
-                SeriLogger.Error(e);
+                if (!field.CanWrite) continue;
 
-                
+                container.Values[field.Name] = field.GetValue(Instance);
             }
-
-
         }
 
 
@@ -79,9 +86,12 @@ namespace Calendar.Settings
 
         #region public
 
+        /// <summary>
+        /// 設定リセット
+        /// </summary>
         public void Reset()
         {
-            CalendarLanguage = Language.de_DE;
+            CalendarLanguage = Language.de_DE.ToString();
         }
 
         #endregion

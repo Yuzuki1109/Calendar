@@ -120,7 +120,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Base\FileBase.cs" />
     <Compile Include="Enums\ApplicationVersion.cs" />
     <Compile Include="Interfaces\IFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

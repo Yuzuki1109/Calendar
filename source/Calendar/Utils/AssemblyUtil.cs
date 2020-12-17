@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml;
 using Library;
+using Windows.Storage;
 
 namespace Calendar.Utils
 {
@@ -25,6 +26,8 @@ namespace Calendar.Utils
         {
             get
             {
+                var hoge = ApplicationData.Current.Version;
+
                 var info = Package.Current.Id.Version;
 
                 return String.Format("v{0}.{1}.{2}.{3}", info.Major, info.Minor, info.Build, info.Revision);

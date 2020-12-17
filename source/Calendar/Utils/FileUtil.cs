@@ -10,7 +10,6 @@ using System.Xml.Serialization;
 using Calendar.Settings;
 using Library;
 using Library.Interfaces;
-using Library.Base;
 
 namespace Calendar.Utils
 {
@@ -41,15 +40,6 @@ namespace Calendar.Utils
         {
             await SemaphoreSlimObj.WaitAsync();
 
-            var fb = data as FileBase;
-
-            if (fb != null)
-            {
-                fb.ConvertSerialize(AssemblyUtil.VersionEnum);
-
-                data = (T)(object)fb;
-            }
-
             try
             {
                 var xmlSerializer = new XmlSerializer(typeof(T));
@@ -60,7 +50,7 @@ namespace Calendar.Utils
                 using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 using (var streamWriter = new StreamWriter(fs, Encoding.UTF8))
                 {
-                    await Task.Run(() => xmlSerializer.Serialize(streamWriter, fb));
+                    await Task.Run(() => xmlSerializer.Serialize(streamWriter, data));
 
                     await streamWriter.FlushAsync();
                 }

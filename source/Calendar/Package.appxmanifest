@@ -8,14 +8,14 @@
 
   <Identity
     Name="Calendar"
-    Publisher="CN=yu-ra"
+    Publisher="CN=Yuzuki"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="a00a6a13-b80e-4cbc-8646-93a9e356bd1d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Calendar</DisplayName>
-    <PublisherDisplayName>yu-ra</PublisherDisplayName>
+    <PublisherDisplayName>Yuzuki</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -42,6 +42,14 @@
       </uap:VisualElements>
     </Application>
   </Applications>
+
+	<Extensions>
+		<Extension Category="windows.publisherCacheFolders" >
+			<PublisherCacheFolders>
+				<Folder Name="Calendar"/>
+			</PublisherCacheFolders>
+		</Extension>
+	</Extensions>
 
   <Capabilities>
     <Capability Name="internetClient" />

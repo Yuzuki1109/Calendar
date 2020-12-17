@@ -7,6 +7,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
+using Calendar.Settings;
 
 namespace Calendar
 {
@@ -21,9 +23,13 @@ namespace Calendar
         /// </summary>
         public App()
         {
+            ApplicationSettings.Load();
+
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
+
+        #region events
 
         /// <summary>
         /// アプリケーションがエンド ユーザーによって正常に起動されたときに呼び出されます。他のエントリ ポイントは、
@@ -87,10 +93,24 @@ namespace Calendar
         /// <param name="e">中断要求の詳細。</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            ApplicationSettings.Save();
+
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: アプリケーションの状態を保存してバックグラウンドの動作があれば停止します
             deferral.Complete();
         }
+
+        /// <summary>
+        /// アプリ実行時に呼び出される
+        /// </summary>
+        /// <param name="sender"></param>z
+        /// <param name="e"></param>
+        private void OnResuming(object sender, object e)
+        {
+            ApplicationDataContainer container = ApplicationData.Current.LocalSettings;
+        }
+
+        #endregion[
 
         /// <summary>
         /// タイトルバーカスタマイズ

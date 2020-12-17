@@ -46,8 +46,6 @@ namespace Calendar.Views
             this.DataContext = ViewModel;
 
             Window.Current.SetTitleBar(this.TitleBar);
-
-            ApplicationSettings.Load();
         }
     }
 }
